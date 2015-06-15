@@ -6,17 +6,24 @@
 package logicanegocio;
 
 import java.util.Objects;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 
 /**
  *
  * @author diegogroba
  */
-public class Promocion {
+@Entity
+public class Promocion extends EntidadPersistente{
     
     //Variables de Instancia
     
+    @OneToOne
     private TipoComida comida;
+    @Column
     private String descripcion;
+    @Column(nullable = false)
     private float precio;
     
     //Constructores

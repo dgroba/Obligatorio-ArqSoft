@@ -6,17 +6,24 @@
 package logicanegocio;
 
 import java.util.Objects;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 
 /**
  *
  * @author Alvaro Roldan
  */
-public class MenuItem {
+@Entity
+public class MenuItem extends EntidadPersistente{
     
     //Variables de Instancia
     
-    private Restaurante restaurante;
+    @OneToOne
     private TipoComida comida;
+    @Column(nullable = false)
+    private String descripcion;
+    @Column(nullable = false)
     private float precio;
     
     //Constructores
@@ -24,28 +31,28 @@ public class MenuItem {
     public MenuItem() {
     }
 
-    public MenuItem(Restaurante restaurante, TipoComida comida, float precio) {
-        this.restaurante = restaurante;
+    public MenuItem(TipoComida comida, String descripcion, float precio) {
+        this.descripcion = descripcion;
         this.comida = comida;
         this.precio = precio;
     }
     
     //Metodos de Acceso y Modificacion
-    
-    public Restaurante getRestaurante() {
-        return restaurante;
-    }
-
-    public void setRestaurante(Restaurante restaurante) {
-        this.restaurante = restaurante;
-    }
-
+        
     public TipoComida getComida() {
         return comida;
     }
 
     public void setComida(TipoComida comida) {
         this.comida = comida;
+    }
+    
+    public String getDescripcion() {
+        return descripcion;
+    }
+    
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     public float getPrecio() {
@@ -57,12 +64,13 @@ public class MenuItem {
     }
     
     //Otros Metodos
-    
+
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 89 * hash + Objects.hashCode(this.restaurante);
-        hash = 89 * hash + Objects.hashCode(this.comida);
+        int hash = 7;
+        hash = 61 * hash + Objects.hashCode(this.comida);
+        hash = 61 * hash + Objects.hashCode(this.descripcion);
+        hash = 61 * hash + Float.floatToIntBits(this.precio);
         return hash;
     }
 
@@ -75,21 +83,19 @@ public class MenuItem {
             return false;
         }
         final MenuItem other = (MenuItem) obj;
-        if (!Objects.equals(this.restaurante, other.restaurante)) {
+        if (!Objects.equals(this.comida, other.comida)) {
             return false;
         }
-        return Objects.equals(this.comida, other.comida);
+        if (!Objects.equals(this.descripcion, other.descripcion)) {
+            return false;
+        }
+        return Float.floatToIntBits(this.precio) == Float.floatToIntBits(other.precio);
     }
 
     @Override
     public String toString() {
-        return "MenuItem{" + "restaurante=" + restaurante + ", comida=" + comida + ", precio=" + precio + '}';
+        return "MenuItem{" + "comida=" + comida + ", descripcion=" + descripcion + ", precio=" + precio + '}';
     }
-    
-    
-   
-  
-    
     
     
 }

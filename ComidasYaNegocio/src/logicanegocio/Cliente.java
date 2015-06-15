@@ -7,15 +7,19 @@ package logicanegocio;
 
 import java.util.ArrayList;
 import java.util.Objects;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 
 /**
  *
  * @author Alvaro Roldan
  */
+@Entity
 public class Cliente extends Usuario {
     
     //Variables de Instancia
     
+    @OneToMany(mappedBy = "cliente")
     private ArrayList<Pedido> pedidos;
     
     //Constructores

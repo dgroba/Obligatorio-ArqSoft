@@ -8,18 +8,29 @@ package logicanegocio;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
  * @author Alvaro Roldan
  */
-public class Pedido {
+@Entity
+public class Pedido extends EntidadPersistente{
     
     //Variables de Instancia
     
+    @OneToOne
     private Restaurante restaurant;
+    @OneToMany(mappedBy = "pedido")
     private ArrayList<MenuItem> items;
+    @Column(nullable = false)
     private float costo;
+    @Temporal(TemporalType.TIMESTAMP)
     private Date fecha;
     
     //Constructores

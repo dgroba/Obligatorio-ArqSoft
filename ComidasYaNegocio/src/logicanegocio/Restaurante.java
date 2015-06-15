@@ -7,16 +7,22 @@ package logicanegocio;
 
 import java.util.ArrayList;
 import java.util.Objects;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 /**
  *
  * @author Alvaro Roldan
  */
+@Entity
 public class Restaurante extends Usuario{
     
     //Variables de Instancia
     
+    @OneToOne
     private Menu menu;
+    @OneToMany(mappedBy = "restaurante")
     private ArrayList<Promocion> promociones;
     
     //Constructores

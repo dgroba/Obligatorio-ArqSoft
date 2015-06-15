@@ -6,18 +6,30 @@
 package logicanegocio;
 
 import java.util.Objects;
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
 
 /**
  *
  * @author Alvaro Roldan
  */
-public class Usuario {
+@Entity
+@DiscriminatorColumn(name="TIPO", discriminatorType = DiscriminatorType.STRING)
+@DiscriminatorValue("PERSONA")
+public abstract class Usuario extends EntidadPersistente{
     
     //Variables de Instancia
     
+    @Column(unique = true, nullable = false)
     private String email;
+    @Column(unique = true, nullable = false)
     private String nombre;
+    @Column(nullable = false)
     private String direccion;
+    @Column(nullable = false)
     private int telefono;
 
     //Constructores

@@ -6,26 +6,28 @@
 package logicanegocio;
 
 import java.util.Objects;
+import javax.persistence.Column;
+import javax.persistence.Entity;
 
 /**
  *
  * @author diegogroba
  */
-public class TipoComida {
+@Entity
+public class TipoComida extends EntidadPersistente{
     
     //Variables de Instancia
     
+    @Column(nullable = false)
     private String nombre;
-    private String descripcion;
     
     //Constructores
     
     public TipoComida() {
     }
 
-    public TipoComida(String nombre, String descripcion) {
+    public TipoComida(String nombre) {
         this.nombre = nombre;
-        this.descripcion = descripcion;
     }
     
     //Metodos de Acceso y Modificacion
@@ -37,22 +39,13 @@ public class TipoComida {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
     
     //Otros Metodos
-    
+
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 59 * hash + Objects.hashCode(this.nombre);
-        hash = 59 * hash + Objects.hashCode(this.descripcion);
+        hash = 97 * hash + Objects.hashCode(this.nombre);
         return hash;
     }
 
@@ -65,15 +58,12 @@ public class TipoComida {
             return false;
         }
         final TipoComida other = (TipoComida) obj;
-        if (!Objects.equals(this.nombre, other.nombre)) {
-            return false;
-        }
-        return Objects.equals(this.descripcion, other.descripcion);
+        return Objects.equals(this.nombre, other.nombre);
     }
 
     @Override
     public String toString() {
-        return "TipoComida{" + "nombre=" + nombre + ", descripcion=" + descripcion + '}';
+        return "TipoComida{" + "nombre=" + nombre + '}';
     }
     
     
