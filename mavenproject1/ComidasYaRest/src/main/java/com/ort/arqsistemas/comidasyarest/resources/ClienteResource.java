@@ -5,7 +5,8 @@
  */
 package com.ort.arqsistemas.comidasyarest.resources;
 
-import com.ort.arqsistemas.comidasyarest.model.Cliente;
+import com.ort.arqsistemas.comidasyamavejb.interfaces.SessionBeanLocal;
+import com.ort.arqsistemas.comidasyamavjpa.entities.Cliente;
 import com.ort.arqsistemas.comidasyarest.service.ClienteService;
 import java.util.List;
 import javax.ws.rs.Consumes;
@@ -19,6 +20,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriInfo;
+import javax.ejb.EJB;
 
 /**
  *
@@ -30,13 +32,16 @@ import javax.ws.rs.core.UriInfo;
 public class ClienteResource {
     
     ClienteService clienteService = new ClienteService();
+    @EJB
+    private SessionBeanLocal sessionBean;
     
     @GET
     public List<Cliente> getClientes() {
-        return clienteService.getAllClientes();
+        //return clienteService.getAllClientes();
+        return sessionBean.obtenerClientes();
     }
     
-    @GET
+   /* @GET
     @Path("/{clienteId}")
     @Produces(MediaType.APPLICATION_JSON)
     public Cliente getCliente(@PathParam("clienteId") int clienteId, @Context UriInfo uriInfo) {
@@ -68,5 +73,5 @@ public class ClienteResource {
     public PedidoResource getPedidoResource() {
         return new PedidoResource();
     }
-    
+    */
 }
